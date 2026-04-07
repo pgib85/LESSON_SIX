@@ -32,7 +32,7 @@ defineProps<{
 
 .link-card:hover {
   transform: translateY(-3px);
-  box-shadow: 0 8px 24px var(--color-shadow);
+  box-shadow: 0 8px 24px var(--color-shadow), var(--color-hover-glow);
   background: var(--color-card-hover);
 }
 
