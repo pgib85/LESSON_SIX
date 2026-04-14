@@ -28,6 +28,10 @@ const caseStudies = [
   { title: 'Born as Ghosts', category: 'Brand Identity', img: '/born-as-ghosts-1.png' },
   { title: 'Dream Big', category: 'Campaign Design', img: '/dream-big.jpg' },
   { title: 'Born as Ghosts II', category: 'Editorial', img: '/born-as-ghosts-2.png' },
+  { title: 'Space I', category: 'Photography', img: '/space 1.jpg' },
+  { title: 'Space II', category: 'Photography', img: '/space 2.jpg' },
+  { title: 'Space III', category: 'Photography', img: '/space 3.jpg' },
+  { title: 'Space IV', category: 'Photography', img: '/space 4.jpg' },
 ]
 </script>
 
