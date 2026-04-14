@@ -26,14 +26,15 @@ defineProps<{
   text-decoration: none;
   font-weight: 600;
   font-size: 1rem;
-  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease, border-color 0.2s ease;
   border: 1px solid var(--color-card-border);
 }
 
 .link-card:hover {
   transform: translateY(-3px);
-  box-shadow: 0 8px 24px var(--color-shadow), var(--color-hover-glow);
+  box-shadow: 0 8px 24px var(--color-shadow);
   background: var(--color-card-hover);
+  border: 3px solid var(--color-hover-border);
 }
 
 .link-card:active {

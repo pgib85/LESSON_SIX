@@ -12,7 +12,7 @@
   --color-avatar-bg: #1e1e1e;
   --color-avatar-text: #888888;
   --color-shadow: rgba(0, 0, 0, 0.4);
-  --color-hover-glow: 0 0 20px rgba(255, 255, 255, 0.6);
+  --color-hover-border: #888888;
 }
 
 /* Light theme */
@@ -28,7 +28,7 @@
   --color-avatar-bg: #e8e8e8;
   --color-avatar-text: #555555;
   --color-shadow: rgba(0, 0, 0, 0.1);
-  --color-hover-glow: 0 0 20px rgba(59, 130, 246, 0.5);
+  --color-hover-border: #000000;
 }
 
 *,
