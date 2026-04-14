@@ -67,11 +67,10 @@ const links = [
 }
 
 .link-group {
-  --link-spacing: 1.5rem;
   display: flex;
   flex-direction: column;
-  gap: var(--link-spacing);
-  margin-top: var(--link-spacing);
+  gap: 1rem;
+  margin-top: 1.5rem;
 }
 
 .link-btn {
