@@ -22,7 +22,7 @@ const links = [
     <v-row align="center" justify="center" class="fill-height">
       <v-col cols="12" sm="8" md="5">
         <v-card class="pa-8 text-center" rounded="xl" elevation="4">
-          <v-avatar size="80" class="mb-4">
+          <v-avatar size="80" class="profile-avatar">
             <v-img src="/PG_Avatar.jpg" alt="Parker Gibson" />
           </v-avatar>
 
@@ -49,7 +49,7 @@ const links = [
           <v-btn
             icon
             variant="text"
-            class="mt-2"
+            class="theme-toggle-btn"
             :aria-label="isDark ? 'Switch to light mode' : 'Switch to dark mode'"
             @click="toggleTheme"
           >
@@ -62,6 +62,10 @@ const links = [
 </template>
 
 <style scoped>
+.profile-avatar {
+  margin-bottom: 1.75rem;
+}
+
 .link-group {
   --link-spacing: 1.5rem;
   display: flex;
@@ -78,5 +82,9 @@ const links = [
   background-color: rgb(var(--v-theme-on-surface)) !important;
   color: rgb(var(--v-theme-surface)) !important;
   border-color: rgb(var(--v-theme-on-surface)) !important;
+}
+
+.theme-toggle-btn {
+  margin-top: 2rem;
 }
 </style>
