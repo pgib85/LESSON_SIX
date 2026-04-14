@@ -1,13 +1,11 @@
 <script setup lang="ts">
-import { ref, computed, onMounted, onUnmounted } from 'vue'
+import { ref, computed } from 'vue'
 import { useTheme } from 'vuetify'
 import LinkButton from '@/components/LinkButton.vue'
 
 const theme = useTheme()
 const isDark = computed(() => theme.global.current.value.dark)
 const email = ref('')
-const scrollBlur = ref(0)
-const scrollBgOpacity = ref(0)
 
 function toggleTheme() {
   const next = isDark.value ? 'light' : 'dark'
@@ -15,142 +13,101 @@ function toggleTheme() {
   localStorage.setItem('theme', next)
 }
 
-function onScroll() {
-  // Max blur of 12px reached after scrolling 400px
-  scrollBlur.value = Math.min(window.scrollY / 400 * 12, 12)
-  // Background fades in over first 300px of scroll
-  scrollBgOpacity.value = Math.min(window.scrollY / 300, 1)
-}
-
-onMounted(() => window.addEventListener('scroll', onScroll, { passive: true }))
-onUnmounted(() => window.removeEventListener('scroll', onScroll))
-
 const links = [
-  { label: 'Portfolio', url: 'https://parkergibson.com', icon: 'mdi-web' },
-  { label: 'Email', url: 'mailto:parker@example.com', icon: 'mdi-email-outline' },
+  { label: 'Portfolio', url: 'https://parkergibson.com', icon: 'mdi-web', description: 'View my design and development work' },
+  { label: 'Email', url: 'mailto:parker@example.com', icon: 'mdi-email-outline', description: 'Get in touch directly' },
 ]
 </script>
 
 <template>
-  <!-- Full-bleed fixed background image, fades in on scroll -->
-  <div class="bg-image" :style="{ opacity: scrollBgOpacity }" />
-
-  <!-- Scrollable page wrapper -->
-  <div class="scroll-wrapper">
-    <div
-      class="content-layer"
-      :style="{ filter: `blur(${scrollBlur}px)`, opacity: 1 - scrollBlur / 24 }"
+  <v-container fluid class="page-container">
+    <!-- Theme toggle -->
+    <v-btn
+      icon
+      variant="text"
+      class="theme-toggle-btn"
+      :aria-label="isDark ? 'Switch to light mode' : 'Switch to dark mode'"
+      @click="toggleTheme"
     >
-      <v-container fluid class="fill-height page-container">
-        <!-- Theme toggle -->
-        <v-btn
-          icon
-          variant="text"
-          class="theme-toggle-btn"
-          :aria-label="isDark ? 'Switch to light mode' : 'Switch to dark mode'"
-          @click="toggleTheme"
-        >
-          <v-icon>{{ isDark ? 'mdi-weather-sunny' : 'mdi-weather-night' }}</v-icon>
-        </v-btn>
+      <v-icon>{{ isDark ? 'mdi-weather-sunny' : 'mdi-weather-night' }}</v-icon>
+    </v-btn>
 
-        <v-row align="center" justify="center" class="fill-height">
-          <!-- Left: hero -->
-          <v-col cols="12" md="6" class="hero-col">
-            <div class="hero-text">Design<br>with me.</div>
-            <p class="hero-sub">Let's build something great together —<br>reach out and let's get started.</p>
+    <!-- Hero section -->
+    <v-row align="center" class="hero-row">
+      <!-- Left: hero text + contact -->
+      <v-col cols="12" md="6" class="hero-col">
+        <div class="hero-text">Design<br>with me.</div>
+        <p class="hero-sub">Let's build something great together —<br>reach out and let's get started.</p>
 
-            <div class="contact-row">
-              <v-text-field
-                v-model="email"
-                placeholder="Enter your email"
-                variant="solo"
-                rounded="xl"
-                density="comfortable"
-                hide-details
-                class="contact-input"
-              />
-              <v-btn
-                size="large"
-                rounded="xl"
-                variant="outlined"
-                class="contact-btn"
-                :href="`mailto:parker@example.com?subject=Let's work together`"
-              >
-                Contact Me
-              </v-btn>
-            </div>
-          </v-col>
+        <div class="contact-row">
+          <v-text-field
+            v-model="email"
+            placeholder="Enter your email"
+            variant="outlined"
+            rounded="xl"
+            density="comfortable"
+            hide-details
+            class="contact-input"
+          />
+          <v-btn
+            size="large"
+            rounded="xl"
+            variant="outlined"
+            class="contact-btn"
+            :href="`mailto:parker@example.com?subject=Let's work together`"
+          >
+            Contact Me
+          </v-btn>
+        </div>
+      </v-col>
 
-          <!-- Right: profile card -->
-          <v-col cols="12" md="4" class="d-flex justify-center">
-            <v-card class="pa-8 text-center profile-card" rounded="xl" elevation="4">
-              <v-avatar size="80" class="profile-avatar">
-                <v-img src="/PG_Avatar.jpg" alt="Parker Gibson" />
-              </v-avatar>
+      <!-- Right: dream-big image -->
+      <v-col cols="12" md="6" class="d-flex justify-end">
+        <div class="hero-image-wrap">
+          <v-img
+            src="/dream-big.jpg"
+            rounded="xl"
+            cover
+            class="hero-image"
+            alt="Dream Big"
+          />
+        </div>
+      </v-col>
+    </v-row>
 
-              <div class="text-h5 font-weight-bold mb-3">Parker Gibson</div>
-              <div class="text-body-1 text-medium-emphasis">Builder of things on the web</div>
+    <!-- Profile + links section -->
+    <v-row justify="center" class="profile-row">
+      <v-col cols="12" class="text-center">
+        <v-avatar size="80" class="profile-avatar">
+          <v-img src="/PG_Avatar.jpg" alt="Parker Gibson" />
+        </v-avatar>
+        <div class="text-h5 font-weight-bold mt-5 mb-2">Parker Gibson</div>
+        <div class="text-body-1 text-medium-emphasis mb-8">Builder of things on the web</div>
+      </v-col>
 
-              <div class="link-group">
-                <LinkButton
-                  v-for="link in links"
-                  :key="link.label"
-                  :label="link.label"
-                  :url="link.url"
-                  :icon="link.icon"
-                />
-              </div>
-            </v-card>
-          </v-col>
-        </v-row>
-      </v-container>
-    </div>
-
-    <!-- Spacer so the page is scrollable -->
-    <div class="scroll-spacer" />
-  </div>
+      <v-col
+        v-for="link in links"
+        :key="link.label"
+        cols="12"
+        sm="6"
+        md="4"
+      >
+        <LinkButton
+          :label="link.label"
+          :url="link.url"
+          :icon="link.icon"
+          :description="link.description"
+        />
+      </v-col>
+    </v-row>
+  </v-container>
 </template>
 
 <style scoped>
-/* Full-bleed background fixed behind everything — hidden until scroll */
-.bg-image {
-  position: fixed;
-  inset: 0;
-  z-index: 0;
-  background: url('/dream-big.jpg') center center / cover no-repeat;
-  transition: opacity 0.3s ease;
-}
-
-/* Dark overlay so text stays readable */
-.bg-image::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.55);
-}
-
-.scroll-wrapper {
-  position: relative;
-  z-index: 1;
-}
-
-/* First screen: full viewport height, content sits here */
-.content-layer {
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  transition: filter 0.05s linear, opacity 0.05s linear;
-  will-change: filter, opacity;
-}
-
-/* Extra height below the fold so there's scroll room */
-.scroll-spacer {
-  height: 100vh;
-}
-
 .page-container {
-  position: relative;
-  height: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem 2rem 4rem;
 }
 
 .theme-toggle-btn {
@@ -158,11 +115,16 @@ const links = [
   top: 1.25rem;
   right: 1.25rem;
   z-index: 100;
-  color: #fff !important;
+}
+
+/* Hero ------------------------------------------------------------------ */
+.hero-row {
+  min-height: 80vh;
+  padding: 2rem 0;
 }
 
 .hero-col {
-  padding: 2rem;
+  padding: 2rem 2rem 2rem 0;
 }
 
 .hero-text {
@@ -171,12 +133,11 @@ const links = [
   line-height: 1.05;
   letter-spacing: -0.02em;
   margin-bottom: 1.5rem;
-  color: #fff;
 }
 
 .hero-sub {
   font-size: 1.1rem;
-  color: rgba(255, 255, 255, 0.7);
+  opacity: 0.6;
   line-height: 1.7;
   margin-bottom: 2.5rem;
 }
@@ -194,31 +155,36 @@ const links = [
 }
 
 .contact-btn {
-  border-color: #fff !important;
-  color: #fff !important;
   font-weight: 600;
   white-space: nowrap;
-  transition: background-color 0.2s ease, color 0.2s ease;
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
 }
 
 .contact-btn:hover {
-  background-color: #fff !important;
-  color: #000 !important;
+  background-color: rgb(var(--v-theme-on-surface)) !important;
+  color: rgb(var(--v-theme-surface)) !important;
+  border-color: rgb(var(--v-theme-on-surface)) !important;
 }
 
-.profile-card {
+/* Hero image ------------------------------------------------------------ */
+.hero-image-wrap {
   width: 100%;
-  max-width: 380px;
+  max-width: 620px;
+  height: 480px;
+}
+
+.hero-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Profile + link cards -------------------------------------------------- */
+.profile-row {
+  padding-top: 3rem;
 }
 
 .profile-avatar {
-  margin-bottom: 1.75rem;
-}
-
-.link-group {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  margin-top: 1.5rem;
+  margin-bottom: 0;
 }
 </style>
