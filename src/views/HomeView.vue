@@ -20,7 +20,7 @@ const carouselSlides = [
 ]
 
 const links = [
-  { label: 'Portfolio', url: 'https://parkergibson.com', icon: 'mdi-web', description: 'View my design and development work' },
+  { label: 'Portfolio', url: 'https://parkergibsondesign.com', icon: 'mdi-web', description: 'View my design and development work' },
   { label: 'Email', url: 'mailto:parker@example.com', icon: 'mdi-email-outline', description: 'Get in touch directly' },
 ]
 </script>
