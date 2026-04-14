@@ -7,6 +7,7 @@ const theme = useTheme()
 const isDark = computed(() => theme.global.current.value.dark)
 const email = ref('')
 const scrollBlur = ref(0)
+const scrollBgOpacity = ref(0)
 
 function toggleTheme() {
   const next = isDark.value ? 'light' : 'dark'
@@ -17,6 +18,8 @@ function toggleTheme() {
 function onScroll() {
   // Max blur of 12px reached after scrolling 400px
   scrollBlur.value = Math.min(window.scrollY / 400 * 12, 12)
+  // Background fades in over first 300px of scroll
+  scrollBgOpacity.value = Math.min(window.scrollY / 300, 1)
 }
 
 onMounted(() => window.addEventListener('scroll', onScroll, { passive: true }))
@@ -29,8 +32,8 @@ const links = [
 </script>
 
 <template>
-  <!-- Full-bleed fixed background image -->
-  <div class="bg-image" />
+  <!-- Full-bleed fixed background image, fades in on scroll -->
+  <div class="bg-image" :style="{ opacity: scrollBgOpacity }" />
 
   <!-- Scrollable page wrapper -->
   <div class="scroll-wrapper">
@@ -69,6 +72,7 @@ const links = [
               <v-btn
                 size="large"
                 rounded="xl"
+                variant="outlined"
                 class="contact-btn"
                 :href="`mailto:parker@example.com?subject=Let's work together`"
               >
@@ -108,12 +112,13 @@ const links = [
 </template>
 
 <style scoped>
-/* Full-bleed background fixed behind everything */
+/* Full-bleed background fixed behind everything — hidden until scroll */
 .bg-image {
   position: fixed;
   inset: 0;
   z-index: 0;
   background: url('/dream-big.jpg') center center / cover no-repeat;
+  transition: opacity 0.3s ease;
 }
 
 /* Dark overlay so text stays readable */
@@ -189,10 +194,16 @@ const links = [
 }
 
 .contact-btn {
-  background-color: #fff !important;
-  color: #000 !important;
+  border-color: #fff !important;
+  color: #fff !important;
   font-weight: 600;
   white-space: nowrap;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.contact-btn:hover {
+  background-color: #fff !important;
+  color: #000 !important;
 }
 
 .profile-card {
