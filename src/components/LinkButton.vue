@@ -16,9 +16,7 @@ defineProps<{
     rounded="xl"
     class="link-card pa-6"
   >
-    <div class="link-icon-chip mb-5">
-      <v-icon :icon="icon" size="22" />
-    </div>
+    <v-icon :icon="icon" size="26" class="link-icon mb-5" />
     <div class="text-subtitle-1 font-weight-bold mb-2">{{ label }}</div>
     <div v-if="description" class="text-body-2 text-medium-emphasis">{{ description }}</div>
   </v-card>
@@ -31,6 +29,10 @@ defineProps<{
   transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
 }
 
+.link-icon {
+  display: block;
+}
+
 .link-card:hover {
   background-color: rgb(var(--v-theme-on-surface)) !important;
   color: rgb(var(--v-theme-surface)) !important;
@@ -40,15 +42,5 @@ defineProps<{
 .link-card:hover .text-medium-emphasis {
   color: rgb(var(--v-theme-surface)) !important;
   opacity: 0.7;
-}
-
-.link-icon-chip {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 44px;
-  height: 44px;
-  border-radius: 12px;
-  background-color: rgba(var(--v-theme-on-surface), 0.08);
 }
 </style>

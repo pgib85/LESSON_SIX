@@ -13,6 +13,12 @@ function toggleTheme() {
   localStorage.setItem('theme', next)
 }
 
+const carouselSlides = [
+  '/born-as-ghosts-1.png',
+  '/born-as-ghosts-2.png',
+  '/dream-big.jpg',
+]
+
 const links = [
   { label: 'Portfolio', url: 'https://parkergibson.com', icon: 'mdi-web', description: 'View my design and development work' },
   { label: 'Email', url: 'mailto:parker@example.com', icon: 'mdi-email-outline', description: 'Get in touch directly' },
@@ -61,28 +67,39 @@ const links = [
         </div>
       </v-col>
 
-      <!-- Right: dream-big image -->
+      <!-- Right: hero image carousel -->
       <v-col cols="12" md="6" class="d-flex justify-end">
         <div class="hero-image-wrap">
-          <v-img
-            src="/dream-big.jpg"
+          <v-carousel
+            height="480"
+            hide-delimiter-background
+            show-arrows="hover"
             rounded="xl"
-            cover
-            class="hero-image"
-            alt="Dream Big"
-          />
+            cycle
+            interval="4000"
+            class="hero-carousel"
+          >
+            <v-carousel-item
+              v-for="slide in carouselSlides"
+              :key="slide"
+              :src="slide"
+              cover
+            />
+          </v-carousel>
         </div>
       </v-col>
     </v-row>
 
     <!-- Profile + links section -->
-    <v-row justify="center" class="profile-row">
-      <v-col cols="12" class="text-center">
-        <v-avatar size="80" class="profile-avatar">
-          <v-img src="/PG_Avatar.jpg" alt="Parker Gibson" />
-        </v-avatar>
-        <div class="text-h5 font-weight-bold mt-5 mb-2">Parker Gibson</div>
-        <div class="text-body-1 text-medium-emphasis mb-8">Builder of things on the web</div>
+    <v-row justify="start" class="profile-row">
+      <v-col cols="12">
+        <div class="profile-header">
+          <v-avatar size="80" class="profile-avatar">
+            <v-img src="/PG_Avatar.jpg" alt="Parker Gibson" />
+          </v-avatar>
+          <div class="text-h5 font-weight-bold mt-5 mb-2">Parker Gibson</div>
+          <div class="text-body-1 text-medium-emphasis mb-8">Builder of things on the web</div>
+        </div>
       </v-col>
 
       <v-col
@@ -166,17 +183,16 @@ const links = [
   border-color: rgb(var(--v-theme-on-surface)) !important;
 }
 
-/* Hero image ------------------------------------------------------------ */
+/* Hero image carousel --------------------------------------------------- */
 .hero-image-wrap {
   width: 100%;
   max-width: 620px;
-  height: 480px;
 }
 
-.hero-image {
+.hero-carousel {
   width: 100%;
-  height: 100%;
-  object-fit: cover;
+  border-radius: 20px;
+  overflow: hidden;
 }
 
 /* Profile + link cards -------------------------------------------------- */
@@ -184,7 +200,9 @@ const links = [
   padding-top: 3rem;
 }
 
-.profile-avatar {
-  margin-bottom: 0;
+.profile-header {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 }
 </style>
