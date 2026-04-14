@@ -77,6 +77,14 @@ const links = [
   transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
 }
 
+.link-btn :deep(.v-btn__content) {
+  gap: 0.75rem;
+}
+
+.link-btn :deep(.v-btn__prepend) {
+  margin-inline: 0;
+}
+
 .link-btn:hover {
   background-color: rgb(var(--v-theme-on-surface)) !important;
   color: rgb(var(--v-theme-surface)) !important;
