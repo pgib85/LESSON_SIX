@@ -27,22 +27,23 @@ const links = [
           </v-avatar>
 
           <div class="text-h5 font-weight-bold mb-3">Parker Gibson</div>
-          <div class="text-body-1 text-medium-emphasis mb-10">Builder of things on the web</div>
+            <div class="text-body-1 text-medium-emphasis">Builder of things on the web</div>
 
-          <v-btn
-            v-for="link in links"
-            :key="link.label"
-            :href="link.url"
-            target="_blank"
-            rel="noopener noreferrer"
-            block
-            variant="outlined"
-            size="large"
-            class="mb-4"
-            :prepend-icon="link.icon"
-          >
-            {{ link.label }}
-          </v-btn>
+            <div class="d-flex flex-column ga-4 mt-8">
+              <v-btn
+                v-for="link in links"
+                :key="link.label"
+                :href="link.url"
+                target="_blank"
+                rel="noopener noreferrer"
+                block
+                variant="outlined"
+                size="large"
+                :prepend-icon="link.icon"
+              >
+                {{ link.label }}
+              </v-btn>
+            </div>
 
           <v-btn
             icon
