@@ -1,90 +1,60 @@
 <script setup lang="ts">
-import LinkCard from '@/components/LinkCard.vue'
+import { computed } from 'vue'
+import { useTheme } from 'vuetify'
+
+const theme = useTheme()
+const isDark = computed(() => theme.global.current.value.dark)
+
+function toggleTheme() {
+  const next = isDark.value ? 'light' : 'dark'
+  theme.global.name.value = next
+  localStorage.setItem('theme', next)
+}
 
 const links = [
-  {
-    label: 'Portfolio',
-    url: 'https://parkergibson.com',
-    icon: '🖥️',
-  },
-  {
-    label: 'Email',
-    url: 'mailto:parker@example.com',
-    icon: '✉️',
-  },
+  { label: 'Portfolio', url: 'https://parkergibson.com', icon: 'mdi-web' },
+  { label: 'Email', url: 'mailto:parker@example.com', icon: 'mdi-email-outline' },
 ]
 </script>
 
 <template>
-  <main class="bio">
-    <div class="card">
-      <div class="avatar">
-        <span class="avatar-placeholder">PG</span>
-      </div>
-      <h1 class="name">Parker Gibson</h1>
-      <p class="tagline">Builder of things on the web</p>
-      <div class="links">
-        <LinkCard
-          v-for="link in links"
-          :key="link.label"
-          :label="link.label"
-          :url="link.url"
-          :icon="link.icon"
-        />
-      </div>
-    </div>
-  </main>
+  <v-container fluid class="fill-height">
+    <v-row align="center" justify="center" class="fill-height">
+      <v-col cols="12" sm="8" md="5">
+        <v-card class="pa-8 text-center" rounded="xl" elevation="4">
+          <v-avatar size="120" class="mb-6" color="grey-darken-3">
+            <span class="text-h4 font-weight-bold">PG</span>
+          </v-avatar>
+
+          <div class="text-h5 font-weight-bold mb-1">Parker Gibson</div>
+          <div class="text-body-1 text-medium-emphasis mb-6">Builder of things on the web</div>
+
+          <v-btn
+            v-for="link in links"
+            :key="link.label"
+            :href="link.url"
+            target="_blank"
+            rel="noopener noreferrer"
+            block
+            variant="outlined"
+            size="large"
+            class="mb-3"
+            :prepend-icon="link.icon"
+          >
+            {{ link.label }}
+          </v-btn>
+
+          <v-btn
+            icon
+            variant="text"
+            class="mt-2"
+            :aria-label="isDark ? 'Switch to light mode' : 'Switch to dark mode'"
+            @click="toggleTheme"
+          >
+            <v-icon>{{ isDark ? 'mdi-weather-sunny' : 'mdi-weather-night' }}</v-icon>
+          </v-btn>
+        </v-card>
+      </v-col>
+    </v-row>
+  </v-container>
 </template>
-
-<style scoped>
-.bio {
-  min-height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 2rem 1rem;
-}
-
-.card {
-  width: 100%;
-  max-width: 480px;
-  text-align: center;
-}
-
-.avatar {
-  width: 120px;
-  height: 120px;
-  border-radius: 50%;
-  margin: 0 auto 1.5rem;
-  overflow: hidden;
-  background: var(--color-avatar-bg);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.avatar-placeholder {
-  font-size: 2.5rem;
-  font-weight: 700;
-  color: var(--color-avatar-text);
-}
-
-.name {
-  font-size: 1.75rem;
-  font-weight: 700;
-  margin: 0 0 0.25rem;
-  color: var(--color-heading);
-}
-
-.tagline {
-  font-size: 1rem;
-  color: var(--color-text-muted);
-  margin: 0 0 2rem;
-}
-
-.links {
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
-}
-</style>

@@ -7,9 +7,11 @@ import { createVuetify } from 'vuetify'
 import App from './App.vue'
 import router from './router'
 
+const savedTheme = localStorage.getItem('theme') ?? 'dark'
+
 const vuetify = createVuetify({
   theme: {
-    defaultTheme: 'light',
+    defaultTheme: savedTheme === 'light' ? 'light' : 'dark',
   },
 })
 
