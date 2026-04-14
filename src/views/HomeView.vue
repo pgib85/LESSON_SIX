@@ -22,8 +22,8 @@ const links = [
     <v-row align="center" justify="center" class="fill-height">
       <v-col cols="12" sm="8" md="5">
         <v-card class="pa-8 text-center" rounded="xl" elevation="4">
-          <v-avatar size="120" class="mb-6" color="grey-darken-3">
-            <span class="text-h4 font-weight-bold">PG</span>
+          <v-avatar size="80" class="mb-6">
+            <v-img src="/PG_Avatar.jpg" alt="Parker Gibson" />
           </v-avatar>
 
           <div class="text-h5 font-weight-bold mb-1">Parker Gibson</div>
