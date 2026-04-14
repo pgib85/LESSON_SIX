@@ -40,9 +40,11 @@ const links = [
               variant="outlined"
               size="large"
               class="link-btn"
-              :prepend-icon="link.icon"
             >
-              {{ link.label }}
+              <span class="link-btn-content">
+                <v-icon :icon="link.icon" />
+                <span>{{ link.label }}</span>
+              </span>
             </v-btn>
           </div>
 
@@ -77,12 +79,14 @@ const links = [
   transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
 }
 
-.link-btn :deep(.v-btn__content) {
+.link-btn-content {
+  display: inline-flex;
+  align-items: center;
   gap: 0.75rem;
 }
 
-.link-btn :deep(.v-btn__prepend) {
-  margin-inline: 0;
+.link-btn :deep(.v-btn__content) {
+  gap: 0.75rem;
 }
 
 .link-btn:hover {
