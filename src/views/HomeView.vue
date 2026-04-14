@@ -22,12 +22,12 @@ const links = [
     <v-row align="center" justify="center" class="fill-height">
       <v-col cols="12" sm="8" md="5">
         <v-card class="pa-8 text-center" rounded="xl" elevation="4">
-          <v-avatar size="80" class="mb-6">
+          <v-avatar size="80" class="mb-4">
             <v-img src="/PG_Avatar.jpg" alt="Parker Gibson" />
           </v-avatar>
 
-          <div class="text-h5 font-weight-bold mb-1">Parker Gibson</div>
-          <div class="text-body-1 text-medium-emphasis mb-6">Builder of things on the web</div>
+          <div class="text-h5 font-weight-bold mb-3">Parker Gibson</div>
+          <div class="text-body-1 text-medium-emphasis mb-10">Builder of things on the web</div>
 
           <v-btn
             v-for="link in links"
@@ -38,7 +38,7 @@ const links = [
             block
             variant="outlined"
             size="large"
-            class="mb-3"
+            class="mb-4"
             :prepend-icon="link.icon"
           >
             {{ link.label }}
