@@ -23,6 +23,12 @@ const links = [
   { label: 'Portfolio', url: 'https://parkergibsondesign.com', icon: 'mdi-web', description: 'View my design and development work' },
   { label: 'Email', url: 'mailto:parker@example.com', icon: 'mdi-email-outline', description: 'Get in touch directly' },
 ]
+
+const caseStudies = [
+  { title: 'Born as Ghosts', category: 'Brand Identity', img: '/born-as-ghosts-1.png' },
+  { title: 'Dream Big', category: 'Campaign Design', img: '/dream-big.jpg' },
+  { title: 'Born as Ghosts II', category: 'Editorial', img: '/born-as-ghosts-2.png' },
+]
 </script>
 
 <template>
@@ -117,6 +123,37 @@ const links = [
         />
       </v-col>
     </v-row>
+
+    <!-- Case Studies section -->
+    <section class="case-studies-section">
+      <div class="case-studies-header">
+        <div class="text-overline text-medium-emphasis mb-2">Case Studies</div>
+        <div class="text-h4 font-weight-bold case-studies-heading">
+          Work that speaks<br>for itself.
+        </div>
+      </div>
+
+      <div class="case-studies-track">
+        <a
+          v-for="study in caseStudies"
+          :key="study.title"
+          class="case-card"
+          href="#"
+          @click.prevent
+        >
+          <v-img
+            :src="study.img"
+            :alt="study.title"
+            cover
+            class="case-card-img"
+          />
+          <div class="case-card-meta">
+            <div class="text-overline case-card-category">{{ study.category }}</div>
+            <div class="text-subtitle-1 font-weight-bold case-card-title">{{ study.title }}</div>
+          </div>
+        </a>
+      </div>
+    </section>
   </v-container>
 </template>
 
@@ -204,5 +241,74 @@ const links = [
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+}
+
+/* Case Studies ---------------------------------------------------------- */
+.case-studies-section {
+  padding: 5rem 0 4rem;
+}
+
+.case-studies-header {
+  margin-bottom: 2.5rem;
+}
+
+.case-studies-heading {
+  font-size: clamp(1.75rem, 4vw, 3rem);
+  line-height: 1.15;
+}
+
+.case-studies-track {
+  display: flex;
+  gap: 1.5rem;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  padding-bottom: 1.5rem;
+  /* hide scrollbar visually but keep it functional */
+  scrollbar-width: none;
+}
+
+.case-studies-track::-webkit-scrollbar {
+  display: none;
+}
+
+.case-card {
+  flex: 0 0 340px;
+  scroll-snap-align: start;
+  border-radius: 20px;
+  overflow: hidden;
+  position: relative;
+  text-decoration: none;
+  color: inherit;
+  transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+  cursor: pointer;
+}
+
+.case-card:hover {
+  transform: scale(1.04);
+  z-index: 2;
+}
+
+.case-card-img {
+  width: 340px;
+  height: 440px;
+  display: block;
+}
+
+.case-card-meta {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 1.25rem 1.25rem 1rem;
+  background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 100%);
+}
+
+.case-card-category {
+  color: rgba(255,255,255,0.7);
+  letter-spacing: 0.08em;
+}
+
+.case-card-title {
+  color: #fff;
 }
 </style>
