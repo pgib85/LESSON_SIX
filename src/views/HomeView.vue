@@ -27,24 +27,24 @@ const links = [
           </v-avatar>
 
           <div class="text-h5 font-weight-bold mb-3">Parker Gibson</div>
-            <div class="text-body-1 text-medium-emphasis">Builder of things on the web</div>
+          <div class="text-body-1 text-medium-emphasis">Builder of things on the web</div>
 
-            <div class="d-flex flex-column ga-4 mt-8">
-              <v-btn
-                v-for="link in links"
-                :key="link.label"
-                :href="link.url"
-                target="_blank"
-                rel="noopener noreferrer"
-                block
-                variant="outlined"
-                size="large"
-                class="link-btn"
-                :prepend-icon="link.icon"
-              >
-                {{ link.label }}
-              </v-btn>
-            </div>
+          <div class="link-group">
+            <v-btn
+              v-for="link in links"
+              :key="link.label"
+              :href="link.url"
+              target="_blank"
+              rel="noopener noreferrer"
+              block
+              variant="outlined"
+              size="large"
+              class="link-btn"
+              :prepend-icon="link.icon"
+            >
+              {{ link.label }}
+            </v-btn>
+          </div>
 
           <v-btn
             icon
@@ -62,6 +62,14 @@ const links = [
 </template>
 
 <style scoped>
+.link-group {
+  --link-spacing: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: var(--link-spacing);
+  margin-top: var(--link-spacing);
+}
+
 .link-btn {
   transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
 }
