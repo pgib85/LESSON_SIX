@@ -29,7 +29,7 @@ const links = [
           <div class="text-h5 font-weight-bold mb-3">Parker Gibson</div>
             <div class="text-body-1 text-medium-emphasis">Builder of things on the web</div>
 
-            <div class="d-flex flex-column ga-4 mt-8">
+            <div class="d-flex flex-column ga-4 mt-4">
               <v-btn
                 v-for="link in links"
                 :key="link.label"
@@ -39,6 +39,7 @@ const links = [
                 block
                 variant="outlined"
                 size="large"
+                class="link-btn"
                 :prepend-icon="link.icon"
               >
                 {{ link.label }}
@@ -59,3 +60,15 @@ const links = [
     </v-row>
   </v-container>
 </template>
+
+<style scoped>
+.link-btn {
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+.link-btn:hover {
+  background-color: rgb(var(--v-theme-on-surface)) !important;
+  color: rgb(var(--v-theme-surface)) !important;
+  border-color: rgb(var(--v-theme-on-surface)) !important;
+}
+</style>
